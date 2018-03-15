@@ -19,7 +19,7 @@ export default class BasicFireBase extends Component {
     render(){
         return(
             <View style={styles.styleview}>
-                <Text style={{color: red}}></Text>
+                <Text style={{color: 'red'}}>FireBase is OK</Text>
             </View> 
         );
     }

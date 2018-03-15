@@ -17,4 +17,4 @@ import BasicSectionList from './components/sectionlist'
 import LifeCycleComponent from './components/lifecycle'
 import NetworkFlat from './components/netflat'
 import BasicFireBase from './components/firebase'
-AppRegistry.registerComponent('Altair', () => HorizontalFlatList);
+AppRegistry.registerComponent('Altair', () => BasicFireBase);
