@@ -1,7 +1,10 @@
 apply plugin: "com.android.application"
-apply plugin: "io.fabric"
+//apply plugin: 'io.fabric'
 import com.android.build.OutputFile
 
+// repositories {
+//   maven { url 'https://maven.fabric.io/public' }
+// }
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
  * and bundleReleaseJsAndAssets).
@@ -99,7 +102,7 @@ android {
         javaMaxHeapSize "4g"
     }
 
-    compileSdkVersion 23
+    compileSdkVersion 24
     buildToolsVersion "23.0.1"
 
     defaultConfig {
@@ -148,9 +151,9 @@ android {
 }
 
 dependencies {
-    compile(project(':react-native-firebase')) {
-        transitive = false
-    }
+    // compile(project(':react-native-firebase')) {
+    //     transitive = false
+    // }
 
     // RNFirebase required dependencies
     compile "com.google.firebase:firebase-core:11.8.0"
@@ -167,9 +170,9 @@ dependencies {
     compile "com.google.firebase:firebase-perf:11.8.0"
     compile "com.google.firebase:firebase-storage:11.8.0"
     
-    compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
-        transitive = true
-    }
+    // compile('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
+    // transitive = true;
+    // }
 
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
@@ -184,4 +187,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
     into 'libs'
 }
 
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.gms.google-services'

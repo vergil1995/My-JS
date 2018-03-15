@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "cordova": "^8.0.0",
+    "firebase": "^4.11.0",
     "ionic": "^3.19.1",
     "random-string": "^0.2.0",
     "rc-swipeout": "^2.0.4",

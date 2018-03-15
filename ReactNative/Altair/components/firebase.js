@@ -7,7 +7,8 @@ import {
     Image, AppRegistry, FlatList, ImageBackground,
     Alert, TouchableHighlight, TouchableOpacity
 } from 'react-native';
-//import firebase from 'react-native-firebase';
+//import * as firebase from 'firebase';
+import {firebaseApp} from '../config/firebase';
 
 //export = public, Component = tag in HTML
 export default class BasicFireBase extends Component {
