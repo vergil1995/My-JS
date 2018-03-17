@@ -4,6 +4,7 @@ import {
     StyleSheet,
     Text,
     View,
+    TextInput,
     Image, AppRegistry, FlatList, ImageBackground,
     Alert, TouchableHighlight, TouchableOpacity
 } from 'react-native';
@@ -18,10 +19,25 @@ export default class BasicFireBase extends Component {
     constructor(props){
         // super goi contructor cua lop cha-Component
            super(props); 
+           // quan sat thay doi user
+           this.unsubcriber = null;
            this.state = {
-               isAuthenticated: false
+               isAuthenticated: false,
+               typedEmail: '',
+               typedPass: '',
+               user: null 
            };
         
+    }
+    componentDidMount(){
+        this.unsubcriber = firebaseApp.auth().onAuthStateChanged((changeduser)=>{
+            this.setState({user: changeduser});
+        });
+    }
+    componentWillUnmount(){
+        if(this.unsubcriber){
+            this.unsubcriber();
+        }
     }
     onAnonymous = () => {
         firebaseApp.auth().signInAnonymously()
@@ -31,6 +47,29 @@ export default class BasicFireBase extends Component {
                 // render dc goi lai khi state thay doi
                 isAuthenticated: true
             });
+        })
+        .catch((error)=>{
+            console.log(`Login Failed. Error = ${error}`);
+        })
+    }
+    onRegister = () => {
+        firebaseApp.auth().createUserWithEmailAndPassword(this.state.typedEmail, this.state.typedPass)
+        .then((loginuser) =>{
+            this.setState({user: loginuser});
+            console.log(`Register with user ${JSON.stringify(loginuser.toJSON())}`);
+
+        })
+        .catch((error)=>{
+            console.log(`Login Failed. Error = ${error}`);
+        })
+
+    }
+    onLogin = () => {
+        firebaseApp.auth().signInWithEmailAndPassword(this.state.typedEmail, this.state.typedPass)
+        .then((loginuser) =>{
+            
+            //console.log(`Login with user ${JSON.stringify(loginuser.toJSON())}`);
+            console.log("Login OKKKKKK");
         })
         .catch((error)=>{
             console.log(`Login Failed. Error = ${error}`);
@@ -52,6 +91,39 @@ export default class BasicFireBase extends Component {
                 </Button>
                 <Text style={{margin: 20, fontSize: 15}}
                 >{this.state.isAuthenticated == true ? "Login in anonymous ": ""}</Text>
+                <TextInput 
+                    style={styles.styleinput}
+                    keyboardType="email-address"
+                    placeholder="Enter Email"
+                    autoCapitalize='none'
+                    onChangeText={
+                        (text)=>{
+                            this.setState({typedEmail: text});
+                        }
+                    }
+                />
+                <TextInput 
+                    style={styles.styleinput}
+                    keyboardType="default"
+                    placeholder="Enter Password"
+                    secureTextEntry={true}
+                    onChangeText={
+                        (text)=>{
+                            this.setState({typedPass: text});
+                        }
+                    }
+                />
+                <View style={{flexDirection: 'row'}}>
+                    <Button containerStyle={styles.styleButton}
+                            style = {{fontSize: 17, color: 'white'}}
+                            onPress={this.onRegister}
+                    >Register</Button>
+                    <Button containerStyle={styles.styleButton}
+                            style = {{fontSize: 17, color: 'white'}}
+                            onPress = {this.onLogin}
+                    >Login</Button>
+                
+                </View>
             </View> 
         );
     }
@@ -65,14 +137,20 @@ const styles = StyleSheet.create({
         backgroundColor: '#00CC99',
         marginTop: Platform.OS === 'ios' ? 34 : 0
     },
-    style2: {
-        width: 100, 
-        height: 200, 
-        backgroundColor: 'blue'
+    styleinput: {
+        width: 200, 
+        height: 40, 
+        margin: 10,
+        padding: 10,
+        borderColor: 'gray',
+        borderWidth: 1,
+        color: 'black'
+        
     },
-    style3: {
-        width: 100, 
-        height: 200, 
-        backgroundColor: 'red'
+    styleButton: {
+        padding: 10,
+        margin: 10,
+        borderRadius: 4,
+        backgroundColor: 'blue'
     }
 });
