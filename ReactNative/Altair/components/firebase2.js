@@ -13,7 +13,7 @@ import {firebaseApp} from '../config/firebase';
 //import firebase from 'react-native-firebase';
 import Button from 'react-native-button';
 import { error } from 'util';
-import FBSDK,{ AccessToken, LoginManager, LoginButton } from 'react-native-fbsdk';
+import { AccessToken, LoginManager, LoginButton } from 'react-native-fbsdk';
 //export = public, Component = tag in HTML
 export default class BasicFireBase extends Component {
     constructor(props){
