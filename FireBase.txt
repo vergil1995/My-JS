@@ -1,0 +1,45 @@
+I. Cmd:
+1. Login Facebook
+Path keytool: C:\Program Files\Java\jre1.8.0_161\bin\keytool.exe
+Path openssl: C:\Users\Altair\Downloads\openssl-0.9.8k_X64\bin\openssl.exe
+cmd by admin
+Developt Key
+keytool -exportcert -alias androiddebugkey -keystore %HOMEPATH%\.android\debug.keystore | C:\Users\Altair\Downloads\openssl-0.9.8k_X64\bin\openssl.exe sha1 -binary | C:\Users\Altair\Downloads\openssl-0.9.8k_X64\bin\openssl.exe base64
+pass: android
+Key: IuB/5XngxC+8JZLCoM+m1/YKlFg=
+
+Release Key: zY00cczs2SG28RTn1bZQvsCftvI=
+keytool -exportcert -alias YOUR_RELEASE_KEY_ALIAS -keystore YOUR_RELEASE_KEY_PATH | C:\Users\Altair\Downloads\openssl-0.9.8k_X64\bin\openssl.exe sha1 -binary | C:\Users\Altair\Downloads\openssl-0.9.8k_X64\bin\openssl.exe base64
+
+II. Config
+
+Tạo chuỗi cho ID ứng dụng Facebook và các chuỗi cần để bật Tab tùy chỉnh của Chrome. Ngoài ra, hãy thêm FacebookActivity vào tệp kê khai Android của bạn.
+1. Mở tệp /app/res/values/strings.xml.
+2. Thêm phần sau:
+		<string name="facebook_app_id">2062148800736970</string>
+		<string name="fb_login_protocol_scheme">fb2062148800736970</string>
+3. Mở tệp /app/manifest/AndroidManifest.xml.
+4. Thêm thành phần uses-permission sau đây vào phía sau thành phần application:
+          
+		<uses-permission android:name="android.permission.INTERNET"/>
+
+5. Thêm thành phần meta-data sau, một hoạt động của Facebook, một hoạt động và bộ lọc dự định của Tab tùy chỉnh Chrome vào bên trong thành phần application:
+		<meta-data android:name="com.facebook.sdk.ApplicationId" 
+				android:value="@string/facebook_app_id"/>
+			
+			<activity android:name="com.facebook.FacebookActivity"
+				android:configChanges=
+						"keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+				android:label="@string/app_name" />
+			<activity
+				android:name="com.facebook.CustomTabActivity"
+				android:exported="true">
+				<intent-filter>
+					<action android:name="android.intent.action.VIEW" />
+					<category android:name="android.intent.category.DEFAULT" />
+					<category android:name="android.intent.category.BROWSABLE" />
+					<data android:scheme="@string/fb_login_protocol_scheme" />
+				</intent-filter>
+			</activity>
+			
+			

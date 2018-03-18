@@ -13,7 +13,7 @@ import {firebaseApp} from '../config/firebase';
 //import firebase from 'react-native-firebase';
 import Button from 'react-native-button';
 import { error } from 'util';
-
+import { AccessToken, LoginManager, LoginButton } from 'react-native-fbsdk';
 //export = public, Component = tag in HTML
 export default class BasicFireBase extends Component {
     constructor(props){
@@ -75,6 +75,31 @@ export default class BasicFireBase extends Component {
             console.log(`Login Failed. Error = ${error}`);
         })
     }
+    onLoginFacebook = () => {
+        LoginManager
+            .logInWithReadPermissions(['public_profile', 'email'])
+            .then((result) => {
+                // lay access token
+                if (result.isCancelled) {
+                    return Promise.reject(new Error('The user cancelled the request'));
+                }
+                console.log(`Login success with permissions: ${result.grantedPermissions.toString()}`);
+                // get the access token
+                return AccessToken.getCurrentAccessToken();
+            })
+            .then(data => {
+                // tao credential tu access token. la key login firebase
+                const credential = firebaseApp.auth.FacebookAuthProvider.credential(data.accessToken);      
+                return firebaseApp.auth().signInWithCredential(credential);
+            })
+            .then((currentUser) => {
+                console.log(`Facebook Login with user : ${JSON.stringify(currentUser.toJSON())}`);            
+            })
+            .catch((error) => {
+                console.log(`Facebook login fail with error: ${error}`);
+            });
+    }
+
     render(){
         return(
             <View style={styles.styleview}>
@@ -122,8 +147,17 @@ export default class BasicFireBase extends Component {
                             style = {{fontSize: 17, color: 'white'}}
                             onPress = {this.onLogin}
                     >Login</Button>
-                
                 </View>
+                <Button containerStyle={{
+                    padding: 10,
+                    width: 150,
+                    margin: 20,
+                    borderRadius: 4,
+                    backgroundColor: 'rgb(73,104,173)'
+                }}
+                    style={{ fontSize: 18, color: 'white' }}
+                    onPress={this.onLoginFacebook}
+                >Login Facebook</Button>
             </View> 
         );
     }

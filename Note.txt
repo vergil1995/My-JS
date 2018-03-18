@@ -50,4 +50,6 @@ use dataServerNode
 npm i -S formidable
 ObjectId("5a9411e2c0391230c4cd909f"),
 ////////////////////// FireBase
-https://github.com/invertase/react-native-firebase-starter
+react-native install react-native-fbsdk
+npm install react-native-fbsdk
+Xem QuickStart https://developers.facebook.com/quickstarts/2062148800736970/?platform=android

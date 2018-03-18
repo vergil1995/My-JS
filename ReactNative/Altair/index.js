@@ -16,5 +16,5 @@ import Input1 from './components/input1'
 import BasicSectionList from './components/sectionlist'
 import LifeCycleComponent from './components/lifecycle'
 import NetworkFlat from './components/netflat'
-import BasicFireBase from './components/firebase'
+import BasicFireBase from './components/firebase2'
 AppRegistry.registerComponent('Altair', () => BasicFireBase);

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Altair</string>
+    <string name="facebook_app_id">2062148800736970</string>
+    <string name="fb_login_protocol_scheme">fb2062148800736970</string>
 </resources>
