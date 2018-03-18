@@ -34,7 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new FBSDKPackage(),
+          //new FBSDKPackage(),
           new FBSDKPackage(mCallbackManager)
             
       );
@@ -57,9 +57,9 @@ public class MainApplication extends Application implements ReactApplication {
   //   SoLoader.init(this, /* native exopackage */ false);
   // }
   @Override
-  public void onCreate() {
-  super.onCreate();
-  AppEventsLogger.activateApp(this);
-  //...
-}
+    public void onCreate() {
+        super.onCreate();
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
+    }
 }

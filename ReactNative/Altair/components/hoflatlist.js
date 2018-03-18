@@ -8,7 +8,7 @@ import {
 import { horizontalStatus } from '../flatlist/hordataflat';
 import { horizontalFlatListData } from '../flatlist/hordataflat';
 
-import Icon from 'react-native-vector-icons/Ionicons';
+//import Icon from 'react-native-vector-icons/Ionicons';
 //export = public, Component = tag in HTML
 export default class HorizontalFlatList extends Component {
     constructor(props){
@@ -79,9 +79,7 @@ class HorizontalFlatListItem extends Component{
                     color: 'white',
                     margin: 20
                 }}>{this.props.item.hour}</Text>  
-                <Icon name={(Platform.OS === 'ios') ? this.props.item.status.ios : this.props.item.status.android}
-                        size={30}
-                        color='white'></Icon>
+                
                 <Text style={{
                     fontSize: 16,
                     color: 'white',
@@ -92,6 +90,9 @@ class HorizontalFlatListItem extends Component{
         );
     }
 }
+//<Icon name={(Platform.OS === 'ios') ? this.props.item.status.ios : this.props.item.status.android}
+// size={30}
+// color='white'></Icon>
 const styles = StyleSheet.create({
     styleview: {
         flex: 1, 

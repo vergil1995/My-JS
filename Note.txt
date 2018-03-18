@@ -2,7 +2,7 @@ How to debug
 - install :npm install -g react-devtools		-g la toan bo ko -g la chi project do thoi
 - http://localhost:8081/debugger-ui/
 - Remote Debug JS
-
+- View Crash adb logcat -b crash
 Button: react-native-button
 Delelte Item FlatList: $yarn add react-native-swipeout / npm install --save rc-swipeout - Android
 https://github.com/sunlight3d/react_native_v0.49
