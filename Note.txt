@@ -53,3 +53,6 @@ ObjectId("5a9411e2c0391230c4cd909f"),
 react-native install react-native-fbsdk
 npm install react-native-fbsdk
 Xem QuickStart https://developers.facebook.com/quickstarts/2062148800736970/?platform=android
+Google Signin: npm install react-native-google-signin --save
+		react-native link react-native-google-signin
+

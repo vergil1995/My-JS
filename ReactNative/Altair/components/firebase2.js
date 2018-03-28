@@ -14,6 +14,8 @@ import {firebaseApp} from '../config/firebase';
 import Button from 'react-native-button';
 import { error } from 'util';
 import FBSDK,{ AccessToken, LoginManager, LoginButton } from 'react-native-fbsdk';
+import {GoogleSignin} from 'react-native-google-signin';
+
 //export = public, Component = tag in HTML
 export default class BasicFireBase extends Component {
     constructor(props){
@@ -38,6 +40,13 @@ export default class BasicFireBase extends Component {
         if(this.unsubcriber){
             this.unsubcriber();
         }
+        GoogleSignin.hasPlayServices({autoResolve: true});
+        GoogleSignin.configure({
+            webClientId: '859119399264-rpjasmgdf0qmt78unoe70tvmni012tkq.apps.googleusercontent.com'
+            //859119399264-rpjasmgdf0qmt78unoe70tvmni012tkq.apps.googleusercontent.com
+            
+
+        })
     }
     onAnonymous = () => {
         firebaseApp.auth().signInAnonymously()
@@ -99,6 +108,21 @@ export default class BasicFireBase extends Component {
                 console.log(`Facebook login fail with error: ${error}`);
             });
     }
+    onLoginGoogle = ()=>{
+        console.log("Sign In Google");
+        GoogleSignin
+        .signIn()
+        .then((data)=>{
+            const credential = firebaseApp.auth.GoogleAuthProvider.credential(data.idToken, data.accessToken);      
+                return firebaseApp.auth().signInWithCredential(credential);
+        })
+        .then((currentUser)=>{
+            console.log(`Google Login with user : ${JSON.stringify(currentUser.toJSON())}`);  
+        })
+        .catch((error) => {
+            console.log(`Google login fail with error: ${error}`);
+        });
+    }
 
     render(){
         return(
@@ -158,6 +182,16 @@ export default class BasicFireBase extends Component {
                     style={{ fontSize: 18, color: 'white' }}
                     onPress={this.onLoginFacebook}
                 >Login Facebook</Button>
+                <Button containerStyle={{
+                    padding: 10,
+                    width: 150,
+                    margin: 20,
+                    borderRadius: 4,
+                    backgroundColor: 'rgb(73,104,173)'
+                }}
+                    style={{ fontSize: 18, color: 'white' }}
+                    onPress={this.onLoginGoogle}
+                >Login Google</Button>
             </View> 
         );
     }

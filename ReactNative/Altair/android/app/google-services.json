@@ -5,6 +5,14 @@
     "project_id": "altair-rn",
     "storage_bucket": "altair-rn.appspot.com"
   },
+  "web":{  
+    "client_id":"859119399264-rpjasmgdf0qmt78unoe70tvmni012tkq.apps.googleusercontent.com",
+    "project_id":"altair-rn",
+    "auth_uri":"https://accounts.google.com/o/oauth2/auth",
+    "token_uri":"https://accounts.google.com/o/oauth2/token",
+    "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret":"aDw00dzatfKJugpfR_pLPl_M"
+  },
   "client": [
     {
       "client_info": {
